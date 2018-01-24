@@ -44,8 +44,20 @@ namespace my_mvvm_app.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050004
+			public const int btnShuffle = 2131034116;
+			
+			// aapt resource value: 0x7f050003
+			public const int editShuffles = 2131034115;
+			
+			// aapt resource value: 0x7f050002
+			public const int txtCapacity = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int txtStadium = 2131034113;
+			
 			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			public const int txtTeamName = 2131034112;
 			
 			static Id()
 			{
@@ -92,11 +104,23 @@ namespace my_mvvm_app.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f040005
+			public const int app_name = 2130968581;
+			
+			// aapt resource value: 0x7f040002
+			public const int capacityLabel = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int numberOfShufflesLabel = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int shuffleButtonLabel = 2130968580;
+			
 			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			public const int stadiumLabel = 2130968577;
 			
 			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			public const int teamNameLabel = 2130968576;
 			
 			static String()
 			{

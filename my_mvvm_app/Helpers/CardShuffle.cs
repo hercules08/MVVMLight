@@ -7,29 +7,27 @@ using my_mvvm_app.Model;
 
 namespace my_mvvm_app.Helpers
 {
-    public class CardShuffle
+    public static class CardShuffle
     {
         static Random rng = new Random();
         static int Shuffles = 0;
-
-        public static List<Cards> Shuffle(List<Cards> footballCards, int numberOfShuffles)
+        public static List<Cards> Shuffle(this List<Cards> list, int shuffles)
         {
-            if(Shuffles < numberOfShuffles)
+            if (Shuffles < shuffles)
             {
-                int n = footballCards.Count;
-                while(n > 1)
+                int n = list.Count;
+                while (n > 1)
                 {
                     n--;
                     int k = rng.Next(n + 1);
-                    var value = footballCards[k];
-                    footballCards[k] = footballCards[n];
-                    footballCards[n] = value;
+                    var value = list[k];
+                    list[k] = list[n];
+                    list[n] = value;
                 }
                 Shuffles++;
-                Shuffle(footballCards, numberOfShuffles);
+                Shuffle(list, shuffles);
             }
-
-            return footballCards;
+            return list;
         }
     }
 }

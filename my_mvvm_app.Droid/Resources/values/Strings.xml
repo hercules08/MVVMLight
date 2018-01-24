@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="hello">Hello World, Click Me!</string>
+  <string name="teamNameLabel">Team name</string>
+  <string name="stadiumLabel">Stadium</string>
+  <string name="capacityLabel">Capacity</string>
+  <string name="numberOfShufflesLabel">Number of shuffles</string>
+  <string name="shuffleButtonLabel">SHUFFLE TEAMS</string>
   <string name="app_name">my_mvvm_app.Droid</string>
 </resources>
