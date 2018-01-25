@@ -24,6 +24,11 @@ namespace my_mvvm_app.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        // set up keys for the pages
+        public const string MainPageKey = "FirstPage";
+        public const string MapPageKey = "MapPage";
+
+
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -43,6 +48,7 @@ namespace my_mvvm_app.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MapViewModel>();
         }
 
         public MainViewModel Main
@@ -52,7 +58,15 @@ namespace my_mvvm_app.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public MapViewModel Map
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

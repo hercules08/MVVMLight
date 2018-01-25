@@ -1,4 +1,6 @@
 ﻿using Foundation;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using my_mvvm_app.ViewModel;
 using UIKit;
 
@@ -26,8 +28,19 @@ namespace my_mvvm_app.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
+            // create the instance of the navigation service
+            var nav = new NavigationService();
+
+            // iOS uses the UINavigationController to move between pages, so will we
+            nav.Initialize(this.Window.RootViewController as UINavigationController);
+
+            // we configure the navigation service to take the key, with the 
+            // second page being the storyboard ID
+            nav.Configure(ViewModelLocator.MainPageKey, "MainPage");
+            nav.Configure(ViewModelLocator.MapPageKey, "MapPage");
+
+            // finally register the service with SimpleIoc
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             return true;
         }
