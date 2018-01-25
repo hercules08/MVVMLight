@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using my_mvvm_app.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -101,6 +102,15 @@ namespace my_mvvm_app.ViewModel
 
             }
         }
+        private string textNumberOfShuffles;
+        public string TextNumberOfShuffles
+        {
+            get { return textNumberOfShuffles; }
+            set
+            {
+                Set(() => TextNumberOfShuffles, ref textNumberOfShuffles, value, true);
+            }
+        }
 
         public RelayCommand ButtonClicked
         {
@@ -108,6 +118,18 @@ namespace my_mvvm_app.ViewModel
             {
                 return buttonClicked ?? (buttonClicked = new RelayCommand(() =>
                 {
+                    if(!string.IsNullOrEmpty(TextNumberOfShuffles))
+                    {
+                        try
+                        {
+                            NumberOfShuffles = Int32.Parse(TextNumberOfShuffles);
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                    }
+
                     // Shuffle the cards NumberOfShuffles times
                     FootballCards = Helpers.CardShuffle.Shuffle(FootballCards, NumberOfShuffles);
 
@@ -120,7 +142,7 @@ namespace my_mvvm_app.ViewModel
                     Capacity = topCard.Capacity;
                     Longitude = topCard.Longitude;
                     Latitude = topCard.Latitude;
-               }));
+                }));
             }
         }
 

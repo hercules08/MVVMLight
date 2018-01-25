@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using my_mvvm_app.ViewModel;
 using UIKit;
 
 namespace my_mvvm_app.iOS
@@ -9,6 +10,12 @@ namespace my_mvvm_app.iOS
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
+
+        private static ViewModelLocator locator;
+
+        public static ViewModelLocator Locator =>
+            locator ?? (locator = new ViewModelLocator());
+
         // class-level declarations
 
         public override UIWindow Window
