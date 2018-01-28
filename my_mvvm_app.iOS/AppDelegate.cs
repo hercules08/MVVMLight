@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using my_mvvm_app.ViewModel;
+using System;
 using UIKit;
 
 namespace my_mvvm_app.iOS
@@ -32,12 +33,40 @@ namespace my_mvvm_app.iOS
             var nav = new NavigationService();
 
             // iOS uses the UINavigationController to move between pages, so will we
-            nav.Initialize(this.Window.RootViewController as UINavigationController);
+            nav.Initialize((UINavigationController)Window.RootViewController);
 
-            // we configure the navigation service to take the key, with the 
-            // second page being the storyboard ID
-            nav.Configure(ViewModelLocator.MainPageKey, "MainPage");
-            nav.Configure(ViewModelLocator.MapPageKey, "MapPage");
+            ////we configure the navigation service to take the key, with the
+            //// second page being the storyboard ID
+            //nav.Configure(ViewModelLocator.MainPageKey, (arg) =>
+            //{
+            //    var storyboard = this.Window.RootViewController.Storyboard;// UIStoryboard.FromName(storyBoardName, null);
+            //    return storyboard.InstantiateViewController("FirstPage")
+            //    as ViewController;
+            //});
+
+            //nav.Configure(ViewModelLocator.MapPageKey, (arg) =>
+            //{
+            //    var storyboard = this.Window.RootViewController.Storyboard;//UIStoryboard.FromName(ViewModelLocator.MapPageKey, null);
+            //    return storyboard.InstantiateViewController("MapPage") as MapViewController;
+            //});
+
+            try
+            {
+                nav.Configure(ViewModelLocator.MainPageKey, "ViewController");
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                nav.Configure(ViewModelLocator.MapPageKey, "MapViewController");
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             // finally register the service with SimpleIoc
             SimpleIoc.Default.Register<INavigationService>(() => nav);

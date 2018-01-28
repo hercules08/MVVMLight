@@ -28,7 +28,7 @@ namespace my_mvvm_app.iOS
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
             CreateTextBindings();
-            CreateButtonBinding();
+            CreateButtonBindings();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -57,15 +57,20 @@ namespace my_mvvm_app.iOS
                 () => ViewModel.Capacity,
                 () => TxtCapacity.Text);
 
+            editShuffles.EditingChanged += (s, e) => { };
+
             this.SetBinding(() => editShuffles.Text)
                 .UpdateSourceTrigger(Events.EditingChanged)
                 .WhenSourceChanges(() => ViewModel.TextNumberOfShuffles = editShuffles.Text);
         }
 
-        void CreateButtonBinding()
+        void CreateButtonBindings()
         {
             BtnShuffle.SetCommand(Events.Click,
                 ViewModel.ButtonClicked);
+
+            BtnMapView.SetCommand(Events.Click,
+                ViewModel.MapViewButtonClicked);
         }
     }
 
@@ -75,6 +80,9 @@ namespace my_mvvm_app.iOS
 
         public UIButton BtnShuffle =>
             btnShuffle;
+
+        public UIButton BtnMapView =>
+            btnMapView;
 
         public UILabel TxtTeamName =>
             txtTeamName;

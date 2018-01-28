@@ -15,6 +15,10 @@ namespace my_mvvm_app.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnMapView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnShuffle { get; set; }
 
         [Outlet]
@@ -35,6 +39,11 @@ namespace my_mvvm_app.iOS
 
         void ReleaseDesignerOutlets ()
         {
+            if (btnMapView != null) {
+                btnMapView.Dispose ();
+                btnMapView = null;
+            }
+
             if (btnShuffle != null) {
                 btnShuffle.Dispose ();
                 btnShuffle = null;

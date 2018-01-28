@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using my_mvvm_app.Model;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,16 @@ namespace my_mvvm_app.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        INavigationService navigationService;
         List<Cards> FootballCards;
         RelayCommand buttonClicked;
+        RelayCommand buttonShowMap;
 
-        public MainViewModel()
+        public MainViewModel(INavigationService navigation)
         {
+            // make a local copy of the interface
+            navigationService = navigation;
+
             // propogate the Football cards List
             FootballCards = Helpers.Teams.GenerateCards;
 
@@ -118,13 +124,13 @@ namespace my_mvvm_app.ViewModel
             {
                 return buttonClicked ?? (buttonClicked = new RelayCommand(() =>
                 {
-                    if(!string.IsNullOrEmpty(TextNumberOfShuffles))
+                    if (!string.IsNullOrEmpty(TextNumberOfShuffles))
                     {
                         try
                         {
                             NumberOfShuffles = Int32.Parse(TextNumberOfShuffles);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
 
                         }
@@ -143,6 +149,26 @@ namespace my_mvvm_app.ViewModel
                     Longitude = topCard.Longitude;
                     Latitude = topCard.Latitude;
                 }));
+            }
+        }
+
+        public RelayCommand MapViewButtonClicked
+        {
+            get
+            {
+                return buttonShowMap ??
+                    (buttonShowMap = new RelayCommand(() =>
+                    {
+                        try
+                        {
+                            navigationService.NavigateTo(ViewModelLocator.MapPageKey,
+                                new List<double>() { Latitude, Longitude });
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                    }));
             }
         }
 

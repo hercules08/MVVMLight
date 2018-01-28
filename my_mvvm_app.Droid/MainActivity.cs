@@ -10,6 +10,9 @@ namespace my_mvvm_app.Droid
     [Activity(Label = "my_mvvm_app.Droid", MainLauncher = true, Icon = "@mipmap/icon")]
     public partial class MainActivity : ActivityBase
     {
+        Binding<string, string> _teamNameBinding;
+        Binding<string, string> _txtStadiumBinding;
+        Binding<int, string> _txtCapacityBinding;
         public MainViewModel ViewModel = App.Locator.Main;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -24,20 +27,17 @@ namespace my_mvvm_app.Droid
 
         void CreateTextBindings()
         {
-            this.SetBinding(
-                () => ViewModel.TeamName,
-                () => TxtTeamName.Text,
-                BindingMode.TwoWay);
+            _teamNameBinding = this.SetBinding(
+                   () => ViewModel.TeamName,
+                   () => TxtTeamName.Text);
 
-            this.SetBinding(
+            _txtStadiumBinding = this.SetBinding(
                 () => ViewModel.StadiumName,
-                () => TxtStadium.Text,
-                BindingMode.TwoWay);
+                () => TxtStadium.Text);
 
-            this.SetBinding(
+            _txtCapacityBinding = this.SetBinding(
                 () => ViewModel.Capacity,
-                () => TxtCapacity.Text,
-                BindingMode.TwoWay);
+                () => TxtCapacity.Text);
 
             this.SetBinding(
                 () => ViewModel.NumberOfShuffles,
@@ -50,19 +50,26 @@ namespace my_mvvm_app.Droid
             BtnShuffle.SetCommand(
                 Events.Click,
                 ViewModel.ButtonClicked);
+
+            BtnMapView.SetCommand(
+                Events.Click,
+                ViewModel.MapViewButtonClicked);
         }
     }
 
     public partial class MainActivity
     {
         // create the private references to the objects
-        Button btnShuffle;
+        Button btnShuffle, btnMapView;
         TextView txtTeamName, txtStadium, txtCapacity;
         EditText editShuffles;
 
         // create the public properties for the objects
         public Button BtnShuffle => 
             btnShuffle ?? (btnShuffle = FindViewById<Button>(Resource.Id.btnShuffle));
+
+        public Button BtnMapView =>
+            btnMapView ?? (btnMapView = FindViewById<Button>(Resource.Id.btnMapView));
 
         public TextView TxtTeamName =>
             txtTeamName ?? (txtTeamName = FindViewById<TextView>(Resource.Id.txtTeamName));

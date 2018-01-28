@@ -5,5 +5,7 @@
   <string name="capacityLabel">Capacity</string>
   <string name="numberOfShufflesLabel">Number of shuffles</string>
   <string name="shuffleButtonLabel">SHUFFLE TEAMS</string>
+  <string name="mapViewLabel">VIEW MAP</string>
+  <string name="homeLabel">HOME</string>
   <string name="app_name">my_mvvm_app.Droid</string>
 </resources>
